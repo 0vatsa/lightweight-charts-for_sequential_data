@@ -6,7 +6,7 @@ This branch of Lightweight Charts does exactly that, it allows you to plot data 
 ### 2. Limitations
 ------------
 - Does not yet support `float` on the x-axis, the feature will be added soon.
-- Does not yet support `Bar (addBarSeries)` type graphs, other types work fine, this bug will also be handles soon.
+- Does not yet support `Bar (addBarSeries)` type graphs, other types work fine, this bug will also be handled soon.
 - x-axis values will be equidistant, let's say you have x-axis values like this [1,3,5,10,100],
 you would expect, on the graph, the distance between 3&5 and 10&100 to be different, but LightWeight Charts will plot equidistant connecting lines. 
 
@@ -14,26 +14,28 @@ you would expect, on the graph, the distance between 3&5 and 10&100 to be differ
 ------------
 - Need to add support for `float` type on the x-axis
 - Need to add support for `Bar (addBarSeries)` graph
+- Need to integrate with the [Python version of LightWeight Charts](https://github.com/louisnw01/lightweight-charts-python "Python version of LightWeight Charts")
 
 ### 4. Usage 
 ------------
 - CDN:  !todo
 - Or follow the Guide below, modify and run the code locally
-- You find some examples here !to do
+- You can find some examples here !to do
+
 ### 5. Guide 
 ------------
 This section describes exactly what changes you'll need to make to the codebase to make it sequential-data compatible.
 #### 5.1 The Idea
-Before I begin with code modifications, I'll just explain what we are trying to do. We are just going to change two pices of front end, that's it, we won't touch anything else in the codebase. 
+We are just going to change two pieces  of front end, that's it, we won't touch anything else in the codebase. 
 ![](images/idea.png)
 
 #### 5.2 Steps 
-First we will just build from the source, the [instructions](https://github.com/tradingview/lightweight-charts/blob/master/BUILDING.md "instructions") are same as provided by LightWeight Charts themselves. 
+First, we will just build from the source, the [instructions](https://github.com/tradingview/lightweight-charts/blob/master/BUILDING.md "instructions") are same as provided by LightWeight Charts themselves. 
 - `git clone https://github.com/tradingview/lightweight-charts`
 - `cd  lightweight-charts`
 - `npm install `
-- ` cd website`
-- ` npm install`
+- `cd website`
+- `npm install`
 - `cd ..`
 
 Install typescript if you don't already have it 
@@ -46,15 +48,15 @@ Building
 - ` npm run rollup`
 - ` npm run build`
 
-After this in the `./dist/` folder you should have a `lightweight-charts.standalone.development.js` file. This is the file we will be making all the changes to.
+------------
+After this in the `./dist/` folder you should have a `lightweight-charts.standalone.development.js` file. This is the file we will be making all the changes to.  
 All line numbers mentioned here are for the version `4.2.1`, in other versions the line number may vary.
 
-- Locate the function `defaultTickMarkFormatter`, in the version I am using this is at `line 8125`, now in the last line of the function: 
-replace  
-`return localDateFromUtc.toLocaleString(locale, formatOptions);`
-with 
+- Locate the function `defaultTickMarkFormatter`, in the version I am using this is at `line 8125`, now in the last line of the function,
+replace:  
+`return localDateFromUtc.toLocaleString(locale, formatOptions);`  
+with:  
 ` return String(timePoint['_internal_timestamp']);`
-Done, this will handle the grid labels.
 
 - Locate the class `TimeAxisViewRenderer`, in the version I am using this is at `line 1297`, in the class locate the function `_internal_setData`, this is at `line 1301`, add th following lines of code inside the function:
 
