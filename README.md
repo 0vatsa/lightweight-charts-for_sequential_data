@@ -12,6 +12,7 @@ you would expect, on the graph, the distance between 3&5 and 10&100 to be differ
 
 ### 3. !TODO
 ------------
+- Need to add two params to the `setData` function, the target column and x-axis column should be taken as input, right now it follows the default expected `close` and `time` for the target and x-axis column respectively. Will be added soon. 
 - Need to add support for `float` type on the x-axis
 - Need to add support for `Bar (addBarSeries)` graph
 - Need to integrate with the [Python version of LightWeight Charts](https://github.com/louisnw01/lightweight-charts-python "Python version of LightWeight Charts")
