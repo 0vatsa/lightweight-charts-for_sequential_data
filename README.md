@@ -52,11 +52,11 @@ Building
 After this in the `./dist/` folder you should have a `lightweight-charts.standalone.development.js` file. This is the file we will be making all the changes to.  
 All line numbers mentioned here are for the version `4.2.1`, in other versions the line number may vary.
 
-- Locate the function `defaultTickMarkFormatter`, in the version I am using this is at `line 8125`, now in the last line of the function,
+- Locate the function `defaultTickMarkFormatter`, in the version I am using this is at `line 8125`, now in the last line of the function,  
 replace:  
 `return localDateFromUtc.toLocaleString(locale, formatOptions);`  
 with:  
-` return String(timePoint['_internal_timestamp']);`
+`return String(timePoint['_internal_timestamp']);`
 
 - Locate the class `TimeAxisViewRenderer`, in the version I am using this is at `line 1297`, in the class locate the function `_internal_setData`, this is at `line 1301`, add th following lines of code inside the function:
 
