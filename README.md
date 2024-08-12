@@ -39,17 +39,17 @@ First, we will just build from the source, the [instructions](https://github.com
 - `cd ..`
 
 Install typescript if you don't already have it 
-- ` npm install -g typescript`
+- `npm install -g typescript`
 
 Compiling 
 - `npm run tsc `
 
 Building
-- ` npm run rollup`
-- ` npm run build`
+- `npm run rollup`
+- `npm run build`
 
 ------------
-After this in the `./dist/` folder you should have a `lightweight-charts.standalone.development.js` file. This is the file we will be making all the changes to.  
+After this in the `./dist/` folder you should have a `lightweight-charts.standalone.development.js` file, this is the file we will be making all the changes to.  
 All line numbers mentioned here are for the version `4.2.1`, in other versions the line number may vary.
 
 - Locate the function `defaultTickMarkFormatter`, in the version I am using this is at `line 8125`, now in the last line of the function,  
