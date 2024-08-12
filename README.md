@@ -1,6 +1,3 @@
-**Table of Contents**
-
-[TOC]
 ### 1. What is this?
 ------------
 [Lightweight Charts](https://www.tradingview.com/lightweight-charts/ "Lightweight Charts") by TradingView is ~~one of~~ the best open source charting software out there. It's dynamic, its's interactive, it's too good, however, there is one small problem, it does not allow you to plot sequential data i.e., the x-axis has to be timeseries so you can only plot data with timestamps (unix timestamps or yyyy-mm-dd 00:00:00 format). If you wanted to plot x-axis with values [1,2,3,...], it does not allow you to do that. 
@@ -20,14 +17,15 @@ you would expect, on the graph, the distance between 3&5 and 10&100 to be differ
 
 ### 4. Usage 
 ------------
-- CDN: 
-- Follow the Guide below, modify and run the code locally
+- CDN:  !todo
+- Or follow the Guide below, modify and run the code locally
+- You find some examples here !to do
 ### 5. Guide 
 ------------
 This section describes exactly what changes you'll need to make to the codebase to make it sequential-data compatible.
 #### 5.1 The Idea
-Before I begin with code modifications, I'll just explain what we are trying to do. 
-The LightWeight Charts [codebase](http://https://github.com/tradingview/lightweight-charts "codebase") is huge, so trying to uderstand it would be a fools errand and not worth time and effort., !todo
+Before I begin with code modifications, I'll just explain what we are trying to do. We are just going to change two pices of front end, that's it, we won't touch anything else in the codebase. 
+![](images/idea.png)
 
 #### 5.2 Steps 
 First we will just build from the source, the [instructions](https://github.com/tradingview/lightweight-charts/blob/master/BUILDING.md "instructions") are same as provided by LightWeight Charts themselves. 
@@ -70,8 +68,7 @@ if ( (typeof __dateString == 'string') && (__dateString != '') ){
 - After this, we will just define the function `convertToUnixTimestamp` at the beginning of the file, go to about `line  8`, right after the `use strict` line, add the following lines:
 
 ```javascript
-const months = {Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5, 
-					        Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11};
+const months = {Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,  Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11};
 					  
 function convertToUnixTimestamp(dateString) {
 
@@ -84,6 +81,6 @@ function convertToUnixTimestamp(dateString) {
 ```
 That's it, those were the only modifications that had to be made.
 
-### 6. Examples
+
 
 
