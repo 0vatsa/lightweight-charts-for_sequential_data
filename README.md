@@ -1,7 +1,7 @@
 ### 1. What is this?
 ------------
-[Lightweight Charts](https://www.tradingview.com/lightweight-charts/ "Lightweight Charts") by TradingView is ~~one of~~ the best open source charting software out there. It's dynamic, its's interactive, it's too good, however, there is one small problem, it does not allow you to plot sequential data i.e., the x-axis has to be timeseries so you can only plot data with timestamps (unix timestamps or yyyy-mm-dd 00:00:00 format). If you wanted to plot x-axis with values [1,2,3,...], it does not allow you to do that. 
-This branch of Lightweight Charts does exactly that, it allows you to plot data with sequential data [1, 2, 3 ,..] or [..., -3, -2, -1, 0, 1, ...]
+[Lightweight Charts](https://www.tradingview.com/lightweight-charts/ "Lightweight Charts") by TradingView is ~~one of~~ the best open source charting software out there. It's dynamic, its's interactive, it's too good, however, there is one small problem, it does not allow you to plot sequential data i.e., the x-axis has to be timeseries so you can only plot data with timestamps (unix timestamps or yyyy-mm-dd 00:00:00 format). If you wanted to plot x-axis with values `[1,2,3,...]`, it does not allow you to do that. 
+This branch of Lightweight Charts does exactly that, it allows you to plot data with sequential data `[1, 2, 3 ,..]` or `[..., -3, -2, -1, 0, 1, ...]`.
 
 ### 2. Limitations
 ------------
@@ -18,7 +18,7 @@ you would expect, on the graph, the distance between 3&5 and 10&100 to be differ
 
 ### 4. Usage 
 ------------
-- CDN:  !todo
+- CDN:  https://cdn.jsdelivr.net/gh/0vatsa/cdn@main/lightweight_charts_for_sequential_data/lightweight-charts.standalone.development.js
 - Or follow the Guide below, modify and run the code locally
 - You can find some examples here !to do
 
@@ -26,7 +26,7 @@ you would expect, on the graph, the distance between 3&5 and 10&100 to be differ
 ------------
 This section describes exactly what changes you'll need to make to the codebase to make it sequential-data compatible.
 #### 5.1 The Idea
-We are just going to change two pieces  of front end, that's it, we won't touch anything else in the codebase. 
+We are just going to change two pieces  of front end, that's it, we won't touch anything else in the codebase. Every feature mentioned in the documentation will work as expected. 
 ![](images/idea.png)
 
 #### 5.2 Steps 
