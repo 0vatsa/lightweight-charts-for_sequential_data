@@ -1,6 +1,6 @@
 ### 1. What is this?
 ------------
-[Lightweight Charts](https://www.tradingview.com/lightweight-charts/ "Lightweight Charts") by TradingView is ~~one of~~ the best open source charting software out there. It's dynamic, its's interactive, it's too good, however, there is one small problem, it does not allow you to plot sequential data i.e., the x-axis has to be timeseries so you can only plot data with timestamps (unix timestamps or yyyy-mm-dd 00:00:00 format). If you wanted to plot x-axis with values `[1,2,3,...]`, it does not allow you to do that. 
+[Lightweight Charts](https://www.tradingview.com/lightweight-charts/ "Lightweight Charts") by TradingView is ~~one of~~ the best open source charting software out there. It's dynamic, its's interactive, it's too good, however, there is one small problem, it does not allow you to plot sequential data i.e., the x-axis has to be timeseries so you can only plot data with timestamps (unix timestamps or yyyy-mm-dd 00:00:00 format). If you wanted to plot x-axis with values `[1,2,3,...]`, it does not allow you to do that.  
 This branch of Lightweight Charts does exactly that, it allows you to plot data with sequential data `[1, 2, 3 ,..]` or `[..., -3, -2, -1, 0, 1, ...]`.
 
 ### 2. Limitations
@@ -12,15 +12,36 @@ you would expect, on the graph, the distance between 3&5 and 10&100 to be differ
 
 ### 3. !TODO
 ------------
-- Need to add two params to the `setData` function, the target column and x-axis column should be taken as input, right now it follows the default expected `value` and `time` for the target and x-axis column respectively. Will be added soon. 
 - Need to add support for `float` type on the x-axis
 - Need to add support for `Bar (addBarSeries)` graph
 - Need to integrate with the [Python version of LightWeight Charts](https://github.com/louisnw01/lightweight-charts-python "Python version of LightWeight Charts")
 
 ### 4. Usage 
 ------------
-- CDN:  https://cdn.jsdelivr.net/gh/0vatsa/cdn@main/lightweight_charts_for_sequential_data/lightweight-charts.standalone.development.js
-- Or follow the Guide below, modify and run the code locally
+- There is one extra thing you'll have to handle when using this,  
+whenever you call `setData(data)` function, you'll need to add two more parameters, `targetCol` and `xAxisCol`:
+	- `targetCol`: (string) the column name in `data` that needs to be plotted (y-axis) 
+	- `xAxisCol`: (string), the column name in `data` that contains the x-axis values, if not provided, it will plot `1, 2, 3, ...` x-axis, for example:  
+	
+	```javascript
+const chart = LightweightCharts.createChart(document.body, { width: 400, height: 300, timeScale: {timeVisible: true, secondsVisible: true} });
+const lineSeries = chart.addLineSeries();
+lineSeries.setData([
+    { id: 5,  pca1: 80.01 },
+    { id: 10, pca1: 96.63 },
+    { id: 15, pca1: 76.64 },
+    { id: 20, pca1: 81.89 },
+    { id: 25, pca1: 74.43 },
+    { id: 30, pca1: 80.01 },
+    { id: 35, pca1: 96.63 },
+    { id: 40, pca1: 76.64 },
+    { id: 45, pca1: 81.89 },
+    { id: 50, pca1: 82.23 },
+], "pca1", "id");
+```
+
+- CDN:  https://cdn.jsdelivr.net/gh/0vatsa/cdn@main/lightweight_charts_for_sequential_data/lightweight-charts.standalone.development.js  
+Or follow the Guide below, modify and run the code locally
 - You can find some examples here !to do
 
 ### 5. Guide 
@@ -52,7 +73,55 @@ Building
 ------------
 After this in the `./dist/` folder you should have a `lightweight-charts.standalone.development.js` file, this is the file we will be making all the changes to.  
 All line numbers mentioned here are for the version `4.2.1`, in other versions the line number may vary.
+- Locate the class `SeriesApi`, in the version I am using this is at `line 12901`, in the classs, locate the function `setData` at line `12968`. Replace the entire function with:  
 
+```javascript
+setData(data, targetCol, xAxisCol) {
+
+	if (targetCol===undefined){
+
+		alert("in the function setData, 'targetCol' parameter is required");
+		throw new Error("in the function setData, 'targetCol' parameter is required");
+
+	}
+	else {
+		const oldKey = targetCol;
+		const newKey = "value";
+
+		data = data.map(dict => {
+			if (oldKey in dict) {
+				const { [oldKey]: value, ...rest } = dict;
+					   return { ...rest, [newKey]: value };
+			}
+			return dict;
+		})
+	}
+
+	if (xAxisCol===undefined){
+
+		data = data.map((dict, index) => ({
+			...dict,
+			time: index + 1
+		}));	
+	}
+	else {
+		oldKey = targetCol;
+		newKey = "time";
+
+		data = data.map(dict => {
+			if (oldKey in dict) {
+				const { [oldKey]: value, ...rest } = dict;
+					   return { ...rest, [newKey]: value };
+			}
+			return dict;
+		})
+	}
+	checkItemsAreOrdered(data, this._private__horzScaleBehavior);
+	checkSeriesValuesType(this._internal__series._internal_seriesType(), data);
+	this._internal__dataUpdatesConsumer._internal_applyNewData(this._internal__series, data);
+	this._private__onDataChanged('full');
+}
+```
 - Locate the function `defaultTickMarkFormatter`, in the version I am using this is at `line 8125`, now in the last line of the function,  
 replace:  
 `return localDateFromUtc.toLocaleString(locale, formatOptions);`  
