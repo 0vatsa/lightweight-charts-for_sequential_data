@@ -23,7 +23,7 @@ whenever you call `setData(data)` function, you'll need to add two more paramete
 	- `targetCol`: (string) the column name in `data` that needs to be plotted (y-axis) 
 	- `xAxisCol`: (string), the column name in `data` that contains the x-axis values, if not provided, it will plot `1, 2, 3, ...` x-axis, for example:  
 	
-	```javascript
+```javascript
 const chart = LightweightCharts.createChart(document.body, { width: 400, height: 300, timeScale: {timeVisible: true, secondsVisible: true} });
 const lineSeries = chart.addLineSeries();
 lineSeries.setData([
