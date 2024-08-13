@@ -39,7 +39,7 @@ lineSeries.setData([
     { id: 50, pca1: 82.23 },
 ], "pca1", "id");
 ```
-
+##### This will allow for targeted column plots. 
 - CDN:  https://cdn.jsdelivr.net/gh/0vatsa/cdn@main/lightweight_charts_for_sequential_data/lightweight-charts.standalone.development.js  
 Or follow the Guide below, modify and run the code locally
 - You can find some examples here !to do
