@@ -77,50 +77,46 @@ All line numbers mentioned here are for the version `4.2.1`, in other versions t
 
 ```javascript
 setData(data, targetCol, xAxisCol) {
-
-	if (targetCol===undefined){
-
-		alert("in the function setData, 'targetCol' parameter is required");
-		throw new Error("in the function setData, 'targetCol' parameter is required");
-
-	}
-	else {
-		const oldKey = targetCol;
-		const newKey = "value";
-
-		data = data.map(dict => {
-			if (oldKey in dict) {
-				const { [oldKey]: value, ...rest } = dict;
-					   return { ...rest, [newKey]: value };
+			
+			let oldKey, newKey;
+			
+			if (targetCol===undefined){
+				alert("in the function setData, 'targetCol' parameter is required");
+				throw new Error("in the function setData, 'targetCol' parameter is required");
 			}
-			return dict;
-		})
-	}
-
-	if (xAxisCol===undefined){
-
-		data = data.map((dict, index) => ({
-			...dict,
-			time: index + 1
-		}));	
-	}
-	else {
-		oldKey = xAxisCol;
-		newKey = "time";
-
-		data = data.map(dict => {
-			if (oldKey in dict) {
-				const { [oldKey]: value, ...rest } = dict;
-					   return { ...rest, [newKey]: value };
+			else {
+				oldKey = targetCol;
+				newKey = "value";
+				data = data.map(dict => {
+					if (oldKey in dict) {
+						const { [oldKey]: value, ...rest } = dict;
+							   return { ...rest, [newKey]: value };
+					}
+					return dict;
+				})
 			}
-			return dict;
-		})
-	}
-	checkItemsAreOrdered(data, this._private__horzScaleBehavior);
-	checkSeriesValuesType(this._internal__series._internal_seriesType(), data);
-	this._internal__dataUpdatesConsumer._internal_applyNewData(this._internal__series, data);
-	this._private__onDataChanged('full');
-}
+			if (xAxisCol===undefined){
+				data = data.map((dict, index) => ({
+					...dict,
+					time: index + 1
+				}));    
+			}
+			else {
+				oldKey = xAxisCol;
+				newKey = "time";
+				data = data.map(dict => {
+					if (oldKey in dict) {
+						const { [oldKey]: value, ...rest } = dict;
+							   return { ...rest, [newKey]: value };
+					}
+					return dict;
+				})
+			}
+			checkItemsAreOrdered(data, this._private__horzScaleBehavior);
+			checkSeriesValuesType(this._internal__series._internal_seriesType(), data);
+			this._internal__dataUpdatesConsumer._internal_applyNewData(this._internal__series, data);
+			this._private__onDataChanged('full');
+		}
 ```
 - Locate the function `defaultTickMarkFormatter`, in the version I am using this is at `line 8125`, now in the last line of the function,  
 replace:  
