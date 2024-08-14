@@ -19,9 +19,9 @@ you would expect, on the graph, the distance between 3&5 and 10&100 to be differ
 ### 4. Usage 
 ------------
 - There is one extra thing you'll have to handle when using this,  
-whenever you call `setData(data)` function, you'll need to add two more parameters, `targetCol` and `xAxisCol`:
+whenever you call `setData(data)` function, you'll need to add two more parameters, `targetCol` and `xAxisCol` (this will allow for targeted column plots):
 	- `targetCol`: (string) the column name in `data` that needs to be plotted (y-axis) 
-	- `xAxisCol`: (string), the column name in `data` that contains the x-axis values, if not provided, it will plot `1, 2, 3, ...` x-axis, for example:  
+	- `xAxisCol`: (string) the column name in `data` that contains the x-axis values, if not provided, it will plot `1, 2, 3, ...` x-axis, for example:  
 	
 ```javascript
 const chart = LightweightCharts.createChart(document.body, { width: 400, height: 300, timeScale: {timeVisible: true, secondsVisible: true} });
@@ -105,7 +105,7 @@ setData(data, targetCol, xAxisCol) {
 		}));	
 	}
 	else {
-		oldKey = targetCol;
+		oldKey = xAxisCol;
 		newKey = "time";
 
 		data = data.map(dict => {
