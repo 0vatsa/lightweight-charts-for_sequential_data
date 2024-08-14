@@ -1,8 +1,8 @@
 ### 1. What is this?
 ------------
 [Lightweight Charts](https://www.tradingview.com/lightweight-charts/ "Lightweight Charts") by TradingView is ~~one of~~ the best open source charting software out there. It's dynamic, its's interactive, it's too good, however, there is one small problem, it does not allow you to plot sequential data i.e., the x-axis has to be timeseries so you can only plot data with timestamps (unix timestamps or yyyy-mm-dd 00:00:00 format). If you wanted to plot x-axis with values `[1,2,3,...]`, it does not allow you to do that.  
-This branch of Lightweight Charts does exactly that, it allows you to plot data with sequential data `[1, 2, 3 ,..]` or `[..., -3, -2, -1, 0, 1, ...]`.
-
+This branch of Lightweight Charts does exactly that, it allows you to plot data with sequential data `[1, 2, 3 ,..]` or `[..., -3, -2, -1, 0, 1, ...]`.  
+[Here](https://0vatsa.github.io/charts/lwc_sequential_data/shill/ "Here") is an example as to why you might want to use this.
 ### 2. Limitations
 ------------
 - Does not yet support `float` on the x-axis, the feature will be added soon.
@@ -43,7 +43,7 @@ lineSeries.setData([
 ##### This will allow for targeted column plots. 
 - CDN:  https://cdn.jsdelivr.net/gh/0vatsa/cdn@latest/lightweight_charts_for_sequential_data/lightweight-charts.standalone.development.js  
 Or follow the Guide below, modify and run the code locally
-- You can find some examples here !to do
+- You can find some examples [here](https://github.com/0vatsa/0vatsa.github.io/tree/main/charts/lwc_sequential_data "here"), hosted at [1](https://0vatsa.github.io/charts/lwc_sequential_data/example_1/ "1"), [2](https://0vatsa.github.io/charts/lwc_sequential_data/example_2/ "2"), [3](https://0vatsa.github.io/charts/lwc_sequential_data/example_3/ "3"). 
 
 ### 5. Guide 
 ------------
